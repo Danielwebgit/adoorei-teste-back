@@ -3,16 +3,21 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\SaleServices;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
 {
+
+    public function __construct(protected SaleServices $saleServices)
+    {}
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
+        $response = $this->saleServices->fetchAllSales();
     }
 
     /**

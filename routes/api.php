@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ProductsController;
+use App\Http\Controllers\Api\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,17 @@ use App\Http\Controllers\Api\ProductsController;
  * */
 Route::prefix('v1')->group(function (){
 
-/** Routes to products groups */
-Route::prefix('products')->group(function (){
+    /** Routes to products groups */
+    Route::prefix('/products')->group(function (){
 
-    Route::get('/', [ProductsController::class, 'index']);
+        Route::get('/', [ProductsController::class, 'index']);
+    });
 
-});
+    /** Routes to sales groups */
+    Route::prefix('sales')->group(function (){
+
+        Route::get('/', [SalesController::class, 'index']);
+    });
 
 });
 /**
