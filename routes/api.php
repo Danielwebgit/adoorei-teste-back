@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Api\ProductsController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,6 +16,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+/**
+ * Start - v1 / routes
+ * */
+Route::prefix('v1')->group(function (){
+
+/** Routes to products groups */
+Route::prefix('products')->group(function (){
+
+    Route::get('/', [ProductsController::class, 'index']);
+
 });
+
+});
+/**
+ * End - v1 / routes
+ * */
