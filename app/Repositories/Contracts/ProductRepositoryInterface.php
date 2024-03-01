@@ -4,5 +4,5 @@ namespace App\Repositories\Contracts;
 
 interface ProductRepositoryInterface
 {
-    public function fetchProducts();
+    public function fetchAllProducts();
 }
