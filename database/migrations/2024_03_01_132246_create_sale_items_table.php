@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('sale_items', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sale_id');
-            $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('sale_id')->references('sale_id')->on('sales');
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('product_id')->references('product_id')->on('products');
             $table->decimal('price', 10, 2);
             $table->integer('amount');
             $table->timestamps();

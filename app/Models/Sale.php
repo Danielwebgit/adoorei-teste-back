@@ -13,7 +13,7 @@ class Sale extends Model
 
     public function items()
     {
-        return $this->hasMany(SaleItem::class);
+        return $this->hasMany(SaleItem::class, 'sale_id', 'sale_id');
     }
 
 }

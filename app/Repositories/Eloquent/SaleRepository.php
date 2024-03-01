@@ -14,7 +14,7 @@ class SaleRepository implements SaleRepositoryInterface
 
     public function fetchAllSales()
     {
-        return $this->model->all();
+        return $this->model->with('items')->get();
     }
 
     public function findSaleById($saleId)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\SaleResource;
 use App\Services\SaleServices;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class SalesController extends Controller
     public function index()
     {
         $response = $this->saleServices->fetchAllSales();
+        return SaleResource::collection($response);
     }
 
     /**
