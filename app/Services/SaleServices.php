@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\SaleResource;
 use App\Models\Sale;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\SaleItemRepositoryInterface;
@@ -65,6 +66,12 @@ class SaleServices
         });
     }
 
+    public function findSaleById($saleId)
+    {
+        $salesData = $this->saleRepositoryInterface->findSaleById($saleId);
+       return SaleResource::collection($salesData);
+    }
+
     public function calculatePrice($quantity, $unitPrice): float
     {
         return $quantity * $unitPrice;
@@ -79,5 +86,18 @@ class SaleServices
         }
 
         return $valueTotal;
+    }
+
+    public function cancelSale($saleId)
+    {
+        try {
+
+            $this->saleRepositoryInterface->cancelSale($saleId);
+
+            return response()->json(['msg' => Sale::MSG_SALE_CANCELED]);
+
+        } catch(Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 404) ;
+        }
     }
 }

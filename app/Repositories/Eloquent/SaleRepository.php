@@ -19,7 +19,7 @@ class SaleRepository implements SaleRepositoryInterface
 
     public function findSaleById($saleId)
     {
-        return $this->model->find($saleId);
+        return $this->model->with('items')->where('sale_id', $saleId)->get();
     }
 
     public function storeSale(int $totalAmount, float $calculePriceTotal, string $statusApprovedSale)
@@ -30,5 +30,16 @@ class SaleRepository implements SaleRepositoryInterface
             'status' => $statusApprovedSale
         ];
         return $this->model->create($sale);
+    }
+
+    public function cancelSale($saleId): bool
+    {
+        $cancelSale = $this->model->where('sale_id', $saleId)->update(['status' => Sale::STATUS_CANCELED_SALE]);
+
+        if ($cancelSale === 0) {
+            throw new \Exception(Sale::MSG_SALE_NOT_FOUND);
+        }
+
+        return $cancelSale;
     }
 }
