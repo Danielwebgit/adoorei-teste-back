@@ -32,6 +32,8 @@ Route::prefix('v1')->group(function (){
     Route::prefix('sales')->group(function (){
 
         Route::get('/', [SalesController::class, 'index']);
+        Route::post('/store', [SalesController::class, 'store']);
+
     });
 
 });

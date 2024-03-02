@@ -9,7 +9,10 @@ class Sale extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['amount', 'price_total'];
+    const STATUS_APPROVED_SALE = 'approdev';
+    const STATUS_CANCELED_SALE = 'canceled';
+
+    protected $fillable = ['amount', 'price_total', 'status'];
 
     public function items()
     {

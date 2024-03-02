@@ -3,14 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SaleFormRequest;
 use App\Http\Resources\SaleResource;
+use App\Services\SaleItemService;
 use App\Services\SaleServices;
 use Illuminate\Http\Request;
 
 class SalesController extends Controller
 {
 
-    public function __construct(protected SaleServices $saleServices)
+    public function __construct(
+            protected SaleServices $saleServices,
+            protected SaleItemService $saleItemService
+        )
     {}
 
     /**
@@ -25,9 +30,12 @@ class SalesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(SaleFormRequest $request)
     {
-        //
+        $salesData = $this->saleServices->storeSale($request->input());
+        $this->saleItemService->storeSaleItems($salesData['data_sales'], $salesData['sale_id']);
+
+        return response()->json([ 'msg' => 'Venda realizada com sucesso!']);
     }
 
     /**

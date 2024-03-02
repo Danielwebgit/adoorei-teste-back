@@ -15,4 +15,20 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return $this->model->all();
     }
+
+    public function findProductById($productId)
+    {
+        return $this->model->where('product_id', $productId)->first();
+    }
+
+    public function searchForProductsByIds($productIds)
+    {
+        $productsIds = [];
+
+        foreach($productIds as $item) {
+            $productsIds[] = $item['product_id'];
+        }
+
+        return $this->model->whereIn('product_id', array_unique($productsIds))->get();
+    }
 }

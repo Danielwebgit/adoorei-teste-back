@@ -17,6 +17,7 @@ class SaleResource extends JsonResource
         return [
             'sale_id' => $this->sale_id,
             'amount' => $this->amount,
+            'price_total' => $this->price_total,
             'status' => $this->status,
             'products' => ItemsResource::collection($this->whenLoaded('items')),
         ];

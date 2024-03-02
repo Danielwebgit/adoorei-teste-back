@@ -19,6 +19,16 @@ class SaleRepository implements SaleRepositoryInterface
 
     public function findSaleById($saleId)
     {
+        return $this->model->find($saleId);
+    }
 
+    public function storeSale(int $totalAmount, float $calculePriceTotal, string $statusApprovedSale)
+    {
+        $sale = [
+            'amount' => $totalAmount,
+            'price_total' => $calculePriceTotal,
+            'status' => $statusApprovedSale
+        ];
+        return $this->model->create($sale);
     }
 }

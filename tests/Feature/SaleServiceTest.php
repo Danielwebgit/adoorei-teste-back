@@ -2,17 +2,22 @@
 
 namespace Tests\Feature;
 
+use App\Factories\SaleServicesFactory;
+use App\Services\SaleServices;
 use Tests\TestCase;
 
 class SaleServiceTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
+    protected function createSaleServices(): SaleServices
+    {
+        return SaleServicesFactory::create();
+    }
+
     public function testCalculatePrice(): void
     {
-        $result = 50;
+        $saleServices = $this->createSaleServices();
 
+        $result = $saleServices->calculatePrice(2, 25);
         $this->assertEquals(50, $result);
     }
 }
