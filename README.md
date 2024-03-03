@@ -1,66 +1,144 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://camo.githubusercontent.com/cf25d81ab5acf028eda0aa2d361aca96198ef9d789a12a7e9b9931c8c799e297/68747470733a2f2f61646f6f7265692e73332e75732d656173742d322e616d617a6f6e6177732e636f6d2f696d616765732f6c6f6a655f74657374655f6c6f676f61646f6f7265695f313636323437363636332e706e67" alt="Alt Text">
 </p>
 
-## About Laravel
+### Projeto prático de Back-End - Laravel - php 
+### Organizado pela empresa Adoorei.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Foi usado o laravel versão 10 e php 8.1.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-Descrição do teste, ( ou roteiro ).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Utilizando o Laravel cria uma API Rest, que resolva o seguinte cenário:
 
-## Learning Laravel
+    A Loja ABC LTDA, vende produtos de diferentes nichos. No momento precisamos registrar a venda de celulares.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    Não vamos nos preocupar com o cadastro de produtos, porém precisamos ter uma tabela em nosso banco contendo os aparelhos celulares que vão ser vendidos:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- A API vai ter endpoints que possibilitam:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+>Listar produtos disponíveis:
 
-## Laravel Sponsors
+>Cadastrar nova venda:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+>Consultar vendas realizadas:
 
-### Premium Partners
+>Consultar uma venda específica:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+>Cancelar uma venda:
 
-## Contributing
+>Cadastrar novos produtos a uma venda:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Outros recurso implementados que não foram pedidos no teste
 
-## Code of Conduct
+>Serviço de autenticação:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+>Proteção de rotas com middleware:
 
-## Security Vulnerabilities
+- Breve resumo de como foi desenvolvido:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Foi utilizado recursos do container docker podemos garantir que o projeto seja executado de forma isolada
+e compartilhando os mesmos recursos a nível de máquinas, garantindo que com alguns comandos simples o
+projeto esteja de pé em poucos minutos.
+Foi aborado conceitos relacionados a padrões de projetos como por exemplo SOLID, com esses 5 princípios é possível desenvolveer sistemas 
+mais compreensíveis, flexíveis e sustentáveis.
 
-## License
+- O banco de dados foi estruturado com as seguintes entidades:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    $ - categories
+
+    $ - products
+
+    $ - sales
+
+    $ - sale_items
+
+- Adicionado Testes unitário para as seguintes funções:
+
+>calculatePrice:
+
+
+>calculePriceTotal
+
+## Instalação para primeira vez de uso.
+
+Comandos para iniciar o projeto:
+
+Instalar as dependências:
+
+
+Antes de configurar com os comandos configure o .env na raiz do projeto, pode copiar  direto do arquivo .env.example.
+
+Dito isso vamos aos principais comandos:
+> composer install:
+
+Executa o Docker compose, sertifique-se de ter o Docker instalado em sua máquina.
+
+>docker compose up -d --build
+
+Uma vez com o container de pé, vamos dar o comando para entrar dentro da máquina virtual do docker e rodar os comando necessários para finalizar a instalacao do projeto
+
+>docker exec -it (nome ou ID do container) bash
+
+Dentro do container, vamos rodar mais alguns comandos:
+
+>php artisan migrate
+
+>php artisan DatabaseSeeder
+
+Praticamente pronto, não é simples? ; )
+
+**Rotas Post - Login**
+
+**Rota para fazer login com os seguintes dados:
+
+* `http://localhost:8986/api/v1/auth/user/login`
+
+        
+```json
+{
+	"email": "adoorei@gmail.com",
+	"password": "12345"
+}
+```
+        
+
+**Rotas Post - logout/**
+
+- Finaliza o acesso, invalidando o token do JWT
+* `http://localhost:8986/api/v1/auth/user/logout`
+
+**Rotas Get - products/**
+
+- Lista todos os produtos disponíveis
+* `http://localhost:8986/api/v1/products`
+
+**Rotas Post - sales/**
+- Adiciona um produto para uma venda
+* `http://localhost:8986/api/v1/sales/store`
+```json
+
+{
+	"sales": 
+	[
+		{
+		"product_id": 2,
+		"amount": 1
+		}
+	]
+}
+
+```
+
+**Rotas Put - sales/**
+- Cancela alterando o status da venda para cancelado
+* `http://localhost:8986/api/v1/sales/cancel/2`
+
+
+**Rotas Get - sales/**
+- Consultar uma venda específica
+* `http://localhost:8986/api/v1/sales/show/{saleId}`
+
+**Rotas Post - sales/**
+- Adiciona itens a uma venda
+* `http://localhost:8986/api/v1/sales/update/{saleId}`
