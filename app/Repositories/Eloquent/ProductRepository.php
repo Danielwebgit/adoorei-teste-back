@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Support\Arr;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -23,11 +24,7 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function searchForProductsByIds($productIds)
     {
-        $productsIds = [];
-
-        foreach($productIds as $item) {
-            $productsIds[] = $item['product_id'];
-        }
+        $productsIds = Arr::pluck($productIds, 'product_id');
 
         return $this->model->whereIn('product_id', array_unique($productsIds))->get();
     }

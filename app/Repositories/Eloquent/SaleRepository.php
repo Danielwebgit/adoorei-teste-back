@@ -42,4 +42,14 @@ class SaleRepository implements SaleRepositoryInterface
 
         return $cancelSale;
     }
+
+    public function updateSale($saleId, $data)
+    {
+        $sale = $this->model->where('sale_id', $saleId)->first();
+
+        $sale->sale_id = $saleId;
+        $sale->price_total += $data['price_total'];
+        $sale->amount += $data['amount'];
+        $sale->save();
+    }
 }

@@ -32,31 +32,17 @@ class SaleServices
             try {
 
                 $products = $this->productRepositoryInterface->searchForProductsByIds($data['sales']);
-                $dataSales = [];
+                $amountTotalAndPriceTotal = $this->amountTotalAndPriceTotal($products, $data);
 
-                foreach($products as $key => $item) {
-
-                    $dataSales[] = [
-                        'price' => $this->calculatePrice($data['sales'][$key]['amount'], $item['price']),
-                        'amount' => $data['sales'][$key]['amount'],
-                        'product_id' => $item['product_id'],
-                        'created_at' => Carbon::now(),
-                        'updated_at' => Carbon::now()
-                    ];
-                }
-
-                $amounts = array_column($dataSales, 'amount');
-                $calculePriceTotal = $this->calculePriceTotal($dataSales);
-                $totalAmount = array_sum($amounts);
                 $sale = $this->saleRepositoryInterface->storeSale(
-                    $totalAmount,
-                    $calculePriceTotal,
+                    $amountTotalAndPriceTotal['total_amount'],
+                    $amountTotalAndPriceTotal['calcule_price_total'],
                     Sale::STATUS_APPROVED_SALE
                 );
 
                 return [
-                    'data_sales' => $dataSales,
-                    'sale_id' => $sale->id
+                    'data_sales' => $amountTotalAndPriceTotal['data_sales'],
+                    'sale_id' => $sale->sale_id
                 ];
 
             } catch(Exception $e) {
@@ -64,6 +50,32 @@ class SaleServices
                 return response()->json(['error' => $e->getMessage()], 422);
             }
         });
+    }
+
+    public function amountTotalAndPriceTotal($products, $data)
+    {
+        $dataSales = [];
+
+        foreach($products as $key => $item) {
+
+            $dataSales[] = [
+                'price' => $this->calculatePrice($data['sales'][$key]['amount'], $item['price']),
+                'amount' => $data['sales'][$key]['amount'],
+                'product_id' => $item['product_id'],
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now()
+            ];
+        }
+
+        $amountsTotal = array_column($dataSales, 'amount');
+        $calculePriceTotal = $this->calculePriceTotal($dataSales);
+        $totalAmount = array_sum($amountsTotal);
+
+        return [
+            'calcule_price_total' => $calculePriceTotal,
+            'total_amount' => $totalAmount,
+            'data_sales' => $dataSales
+        ];
     }
 
     public function findSaleById($saleId)
@@ -99,5 +111,22 @@ class SaleServices
         } catch(Exception $e) {
             return response()->json(['error' => $e->getMessage()], 404) ;
         }
+    }
+
+    public function updateSale($data, $saleId)
+    {
+        $products = $this->productRepositoryInterface->searchForProductsByIds($data['sales']);
+        $amountTotalAndPriceTotal = $this->amountTotalAndPriceTotal($products, $data);
+
+        $data = [
+            'amount' => $amountTotalAndPriceTotal['total_amount'],
+            'price_total' =>$amountTotalAndPriceTotal['calcule_price_total']
+        ];
+
+        $this->saleRepositoryInterface->updateSale($saleId, $data);
+
+        return [
+            'data_sales' => $amountTotalAndPriceTotal['data_sales']
+        ];
     }
 }
