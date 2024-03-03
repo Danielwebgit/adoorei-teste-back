@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\ProductsController;
 use App\Http\Controllers\Api\SalesController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,19 @@ use App\Http\Controllers\Api\SalesController;
 /**
  * Start - v1 / routes
  * */
-Route::prefix('v1')->group(function (){
+Route::prefix('/v1')->group(function (){
+
+    Route::prefix('/auth/user')->group(function (){
+
+        Route::post('/login', [AuthController::class, 'login']);
+
+        Route::group(['middleware' => ['apiJwt']], function () {
+
+            Route::post('/logout', [AuthController::class, 'logout']);
+
+        });
+
+    });
 
     /** Routes to products groups */
     Route::prefix('/products')->group(function (){
@@ -31,7 +44,13 @@ Route::prefix('v1')->group(function (){
     /** Routes to sales groups */
     Route::prefix('sales')->group(function (){
 
-        Route::get('/', [SalesController::class, 'index']);
+        // Adicionado uma proteção para ver essa rota, apenas quem tem permissão
+        Route::group(['middleware' => ['apiJwt']], function () {
+
+            Route::get('/', [SalesController::class, 'index']);
+
+        });
+
         Route::get('/show/{saleId}', [SalesController::class, 'show']);
         Route::put('/cancel/{saleId}', [SalesController::class, 'cancelSale']);
         Route::post('/update/{saleId}', [SalesController::class, 'updateSale']);
