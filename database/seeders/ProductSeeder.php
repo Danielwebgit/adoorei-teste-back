@@ -24,7 +24,7 @@ class ProductSeeder extends Seeder
                 'name' => 'OnePlus 9',
                 'description' => 'Disponível em várias cores, incluindo Astral Black, Arctic Sky e Winter Mist',
                 'price' => 1400,
-                'category_id' => $category->id,
+                'category_id' => $category->category_id,
                 'created_at' => $dateNow,
                 'updated_at' => $dateNow
             ],
@@ -32,7 +32,7 @@ class ProductSeeder extends Seeder
                 'name' => 'Xiaomi Mi 11',
                 'description' => 'Equipado com o processador Qualcomm Snapdragon 888',
                 'price' => 1500,
-                'category_id' => $category->id,
+                'category_id' => $category->category_id,
                 'created_at' => $dateNow,
                 'updated_at' => $dateNow
             ],
@@ -40,7 +40,7 @@ class ProductSeeder extends Seeder
                 'name' => 'iPhone 13',
                 'description' => 'Alimentado pelo chip Bionic A15 da Apple, o iPhone 13 possui uma tela Super Retina',
                 'price' => 3700,
-                'category_id' => $category->id,
+                'category_id' => $category->category_id,
                 'created_at' => $dateNow,
                 'updated_at' => $dateNow
             ]

@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Sale;
 use App\Repositories\Contracts\SaleRepositoryInterface;
+use Exception;
 
 class SaleRepository implements SaleRepositoryInterface
 {
@@ -47,9 +48,16 @@ class SaleRepository implements SaleRepositoryInterface
     {
         $sale = $this->model->where('sale_id', $saleId)->first();
 
-        $sale->sale_id = $saleId;
-        $sale->price_total += $data['price_total'];
-        $sale->amount += $data['amount'];
-        $sale->save();
+        if ($sale) {
+
+            $sale->sale_id = $saleId;
+            $sale->price_total += $data['price_total'];
+            $sale->amount += $data['amount'];
+            $sale->save();
+
+            return $sale;
+        }
+
+        throw new Exception(Sale::MSG_SALE_NOT_FOUND);
     }
 }
