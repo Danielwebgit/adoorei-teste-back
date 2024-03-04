@@ -10,7 +10,6 @@ use App\Models\SaleItem;
 use App\Services\SaleItemService;
 use App\Services\SaleServices;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SalesController extends Controller
@@ -73,21 +72,5 @@ class SalesController extends Controller
         } catch (Exception $e) {
                 return response()->json(['smg' => $e->getMessage()]);
             }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }
